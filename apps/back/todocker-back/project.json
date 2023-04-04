@@ -1,0 +1,64 @@
+{
+  "name": "back-todocker-back",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/back/todocker-back/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/back/todocker-back",
+        "main": "apps/back/todocker-back/src/main.ts",
+        "tsConfig": "apps/back/todocker-back/tsconfig.app.json",
+        "assets": ["apps/back/todocker-back/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/back/todocker-back/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "back-todocker-back:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "back-todocker-back:build:development"
+        },
+        "production": {
+          "buildTarget": "back-todocker-back:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/back/todocker-back/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/back/todocker-back/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
