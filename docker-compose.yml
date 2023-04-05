@@ -1,6 +1,7 @@
 version: '3'
 services:
-  db:
+  todocker-db:
+    container_name: todocker-db
     image: postgres:9.6
     ports:
       - "5432:5432"
@@ -9,9 +10,10 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - todocker:/var/lib/postgresql/data
     restart: always
-  back:
+  todocker-back:
+    container_name: todocker-back
     build:
       context: ./
       dockerfile: ./apps/back/Dockerfile
@@ -20,11 +22,14 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
-      DB_HOST: db
+      DB_HOST: todocker-db
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: postgres
-  front:
+    depends_on:
+      - todocker-db
+  todocker-front:
+    container_name: todocker-front
     build:
       context: ./
       dockerfile: ./apps/front/Dockerfile
@@ -33,4 +38,9 @@ services:
     environment:
       NODE_ENV: development
       API_URL: http://localhost:3000
+    depends_on:
+      - todocker-back
 
+
+volumes:
+  todocker:
