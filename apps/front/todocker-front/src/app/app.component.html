@@ -1,1 +1,4 @@
-<todocker2-nx-welcome></todocker2-nx-welcome>
+<h1>Tasks</h1>
+<ul>
+  <li *ngFor="let item of (records$ | async)">{{item.label}}</li>
+</ul>
