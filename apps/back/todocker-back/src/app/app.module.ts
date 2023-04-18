@@ -10,7 +10,7 @@ import { AppService } from './app.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'todocker-db',
       port: 5432,
       username: 'postgres',
       password: 'postgres',

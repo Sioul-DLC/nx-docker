@@ -15,19 +15,19 @@ export class RecordsService {
     return this._records.asObservable();
   }
 
-  getRecords(): Observable<RecordDto[]> {
-    return this.httpClient
-      .get<RecordDto[]>('http://localhost:3000/records')
+  getRecords(): void {
+    this.httpClient
+      .get<RecordDto[]>('http://localhost:3000/api/records')
       .pipe(
         tap((data) => {
           this._records.next(data || []);
         })
-      );
+      ).subscribe();
   }
 
   createRecord(data: CreateRecordDto): Observable<RecordDto> {
     return this.httpClient.post<RecordDto>(
-      'http://localhost:3000/records',
+      'http://localhost:3000/api/records',
       data
     ).pipe(
       tap((data) => {
