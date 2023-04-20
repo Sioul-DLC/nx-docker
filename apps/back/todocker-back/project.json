@@ -16,7 +16,8 @@
         "tsConfig": "apps/back/todocker-back/tsconfig.app.json",
         "assets": ["apps/back/todocker-back/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/back/todocker-back/webpack.config.js"
+        "webpackConfig": "apps/back/todocker-back/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

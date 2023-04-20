@@ -2,7 +2,7 @@ version: '3'
 services:
   todocker-db:
     container_name: todocker-db
-    image: postgres:9.6
+    image: postgres
     ports:
       - "5432:5432"
     environment:
@@ -26,8 +26,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: postgres
-    depends_on:
-      - todocker-db
+
   todocker-front:
     container_name: todocker-front
     build:

@@ -1,1 +1,8 @@
-<todocker2-nx-welcome></todocker2-nx-welcome>
+<h1>Tasks</h1>
+<ul class="row">
+  <input type="text" [(ngModel)]="newTodoText" #ctrl="ngModel" required>
+  <button [disabled]="!ctrl.valid" (click)="create()">Ajouter</button>
+</ul>
+<ul>
+  <li *ngFor="let item of (records$ | async)">{{item.label}}</li>
+</ul>
